@@ -1,0 +1,14 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import i18next from "i18next";
+---
+
+<html lang={i18next.language}>
+  <head>
+    <BaseHead />
+  </head>
+
+  <body class="dark:bg-primary bg-zinc-200 ">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{
+    "about": {
+        "name": "Vika Kamenkova",
+        "title": "Hey, welcome to my portfolio!",
+        "first-paragraph": "Hi, I'm a front-end developer focused on responsive HTML layout. I have experience with SCSS preprocessor, using mockups with Figma, and Git version control system. I effectively use Javascript to work with the DOM, integrate various libraries to create functional websites.",
+        "second-paragraph": "Ready to take on challenges in front-end development and continue to develop my skills to gain experience in commercial projects."
+    },
+
+    "social": {
+        "title": "Find me on"
+    },
+
+    "resume" : {
+        "title" : "Grab my résumé!",
+        "text-1" : "I invite you to review my CV for a more detailed consideration of possible cooperation.",
+        "text-2" : "I would be grateful for your time and attention!",
+        "btn" : "Download my CV"
+    },
+
+    "card" : {
+        "title-1" : "Adaptive HTML Template 'Growfy'",
+        "title-2" : "Adaptive HTML Template 'Disign Studio'",
+        "title-3" : "Adaptive HTML Template 'Coca-cola'",
+        "title-4" : "Adaptive HTML Template 'Rorompok store'",
+        "title-5" : "Adaptive HTML Template 'Yalynka store'"
+    },
+    "form" : {
+        "title" : "Write me!",
+        "btn" : "Send",
+        "placeholder-1" : "Enter your email",
+        "placeholder-2" : "Text mesagge"
+    }
+}
