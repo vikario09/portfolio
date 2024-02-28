@@ -13,9 +13,9 @@ import { Card } from "../Card";
       >
         <div class="relative flex items-center gap-x-4">
           <img
-            src="/images/avatar.jpg"
+            src="/portfolio/images/avatar-2.jpg"
             alt=""
-            class="h-10 w-10 rounded-full ring-1 dark:ring-white/10 ring-primary/5"
+            class="h-14 w-14 rounded-full ring-1 dark:ring-white/10 ring-primary/5"
           />
           <div class="text-sm leading-6">
             <div class="font-semibold text-primary dark:text-white">
@@ -31,7 +31,7 @@ import { Card } from "../Card";
 
           <div class="ml-auto flex cursor-pointer">
             <a
-              href="/"
+              href="/portfolio"
               class:list={[
                 "mr-1",
                 { "text-zinc-500": i18next.language === "en" },
@@ -39,7 +39,7 @@ import { Card } from "../Card";
             >
             <p>|</p>
             <a
-              href="/uk"
+              href="/portfolio/uk"
               class:list={[
                 "ml-1",
                 { "text-zinc-500": i18next.language === "uk" },
@@ -174,7 +174,7 @@ import { Card } from "../Card";
           </p>
         </div>
         <div class="w-full mt-8 md:max-w-xs lg:max-w-none">
-          <a href="../../../public/images/avatar.jpg" download>
+          <a href="/portfolio/cv.pdf" target="_blank">
             <button
               type="button"
               class="text-sm py-2 w-full px-4 h-12 font-semibold focus:ring-2 rounded-lg bg-primary dark:bg-white dark:text-primary dark:hover:text-white hover:text-primary dark:hover:bg-white/5 hover:bg-primary/10 text-white flex duration-200 focus:ring-offset-2 focus:ring-inline-flex items-center justify-between"
@@ -203,45 +203,45 @@ import { Card } from "../Card";
         <Card
           client:only
           title={t("card.title-3")}
-          photo="/images/min-portfolio-2.jpg"
+          photo="/portfolio/images/min-portfolio-2.jpg"
           github="https://github.com/vikkuccine/coca-cola"
-          link="https://vikkuccine.saenq.space/coca-cola/"
+          link="https://vikario.space/coca-cola/"
         />
       </div>
       <div class="second lg:row-span-1 second">
         <Card
           client:only
           title={t("card.title-2")}
-          photo="/images/min-portfolio-1.jpg"
+          photo="/portfolio/images/min-portfolio-1.jpg"
           github="https://github.com/vikkuccine/Design-studio"
-          link="https://vikkuccine.saenq.space/design-studio/"
+          link="https://vikario.space/design-studio/"
         />
       </div>
       <div class="third lg:row-span-1">
         <Card
           client:only
           title={t("card.title-1")}
-          photo="/images/min-portfolio-3.jpg"
+          photo="/portfolio/images/min-portfolio-3.jpg"
           github="https://github.com/vikkuccine/growfy"
-          link="https://vikkuccine.saenq.space/growfy/"
+          link="https://vikario.space/growfy/"
         />
       </div>
       <div class="fourth lg:row-span-1">
         <Card
           client:only
           title={t("card.title-4")}
-          photo="/images/min-portfolio-4.jpg"
+          photo="/portfolio/images/min-portfolio-4.jpg"
           github="https://github.com/vikkuccine/rorompok-store"
-          link="https://github.com/vikkuccine/rorompok-store"
+          link="https://vikario.space/rorompok-store"
         />
       </div>
       <div class="fives lg:row-span-1">
         <Card
           client:only
           title={t("card.title-5")}
-          photo="/images/min-portfolio-5.jpg"
+          photo="/portfolio/images/min-portfolio-5.jpg"
           github="https://github.com/vikkuccine/yalynka-store"
-          link="https://github.com/vikkuccine/yalynka-store"
+          link="https://vikario.space/yalynka-store"
         />
       </div>
       <div
@@ -253,10 +253,7 @@ import { Card } from "../Card";
           >
             {t("form.title")}
           </p>
-          <form
-            class="mt-6 sm:flex flex-col w-full lg:max-w-sm mx-auto"
-            action="sendmail.php"
-          >
+          <form class="mt-6 sm:flex flex-col w-full lg:max-w-sm mx-auto form">
             <label for="email-address" class="sr-only">Email address</label>
             <input
               type="email"
@@ -271,6 +268,7 @@ import { Card } from "../Card";
               cols=""
               rows="3"
               name="email-text"
+              id="email-text"
               placeholder={t("form.placeholder-2")}
               class="w-full mt-4 mb-4 px-4 py-2 rounded-lg text-zinc-500 bg-zinc-100 dark:bg-tertiary ring-1 dark:ring-white/10 ring-primary/5 appearance-none focus:ring-white/20 placeholder-zinc-400 focus:border-zinc-300 focus:bg-primary focus:outline-none sm:text-sm"
             ></textarea>
@@ -283,7 +281,42 @@ import { Card } from "../Card";
             </div>
           </form>
         </div>
+        <div
+          class="p-4 border border-primary text-suc rounded-lg absolute bg-white text-center shadow-2xl hidden"
+        >
+          <p class="text-primary text-lg block mb-4">{t ("form.email-success")}</p>
+          <img src="/portfolio/images/giphy.gif" alt="" class="w-auto h-auto">
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.querySelector(".form");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+
+    fetch("/portfolio/sendmail.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        if (data.status === "success") {
+          form.reset();
+          const sucMessage = document.querySelector(".text-suc");
+          sucMessage.classList.remove("hidden");
+          setTimeout(() => {
+            sucMessage.classList.add("hidden");
+          }, 3000);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+</script>

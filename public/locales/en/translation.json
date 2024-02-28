@@ -28,6 +28,7 @@
         "title" : "Write me!",
         "btn" : "Send",
         "placeholder-1" : "Enter your email",
-        "placeholder-2" : "Text mesagge"
+        "placeholder-2" : "Text mesagge",
+        "email-success" : "Message has been sent"
     }
 }
