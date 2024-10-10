@@ -1,7 +1,57 @@
 ---
 import i18next, { t } from "i18next";
 import { Card } from "../Card";
+import { Image } from "astro:assets";
+import darkMode from "../../assets/images/moon-dark-theme-svgrepo-com.svg";
+import lightMode from "../../assets/images/sun-light-theme-svgrepo-com.svg";
 ---
+
+<script>
+
+const lightMode = document.querySelector(".theme-toggle-light");
+const darkMode = document.querySelector(".theme-toggle-dark");
+const rootElement = document.documentElement;
+
+function setTheme(theme) {
+  if (theme === 'dark') {
+    rootElement.classList.add('dark');
+    lightMode.classList.add('hidden');
+    darkMode.classList.remove('hidden');
+  } else {
+    rootElement.classList.remove('dark');
+    lightMode.classList.remove('hidden');
+    darkMode.classList.add('hidden');
+  }
+}
+
+
+function initializeTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else {
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(prefersDarkScheme ? 'dark' : 'light');
+  }
+}
+
+
+initializeTheme();
+
+
+lightMode.addEventListener('click', () => {
+  setTheme('dark');
+  localStorage.setItem('theme', 'dark'); 
+});
+
+darkMode.addEventListener('click', () => {
+  setTheme('light');
+  localStorage.setItem('theme', 'light'); 
+});
+
+
+</script>
 
 <section>
   <div class="p-4">
@@ -29,22 +79,26 @@ import { Card } from "../Card";
             >
           </div>
 
-          <div class="ml-auto flex cursor-pointer">
-            <a
-              href="/portfolio"
-              class:list={[
-                "mr-1",
-                { "text-zinc-500": i18next.language === "en" },
-              ]}>EN</a
-            >
-            <p>|</p>
-            <a
-              href="/portfolio/uk"
-              class:list={[
-                "ml-1",
-                { "text-zinc-500": i18next.language === "uk" },
-              ]}>UA</a
-            >
+          <div class="flex flex-col ml-auto">
+            <Image src={lightMode} alt="light mode" class="w-6 cursor-pointer self-end mb-4 theme-toggle-light" />
+            <Image src={darkMode} alt="light mode" class="w-6 cursor-pointer mb-4 hidden self-end theme-toggle-dark" />
+            <div class="ml-auto flex cursor-pointer">
+              <a
+                href="/portfolio"
+                class:list={[
+                  "mr-1",
+                  { "dark:text-zinc-300": i18next.language === "en", "text-zinc-500 dark:text-stone-600":  i18next.language !== "en"},
+                ]}>EN</a
+              >
+              <p class="dark:text-stone-600">|</p>
+              <a
+                href="/portfolio/uk"
+                class:list={[
+                  "ml-1",
+                  { "dark:text-zinc-300": i18next.language === "uk", "text-zinc-500 dark:text-stone-600":  i18next.language !== "uk" },
+                ]}>UA</a
+              >
+            </div>
           </div>
         </div>
         <p
@@ -93,7 +147,7 @@ import { Card } from "../Card";
             >
           </a>
           <a
-            href="https://github.com/vikkuccine"
+            href="https://github.com/vikario09"
             target="_blank"
             class="flex items-center justify-center aspect-square shadow-xl dark:shadow-thick hover:bg-zinc-100 dark:hover:bg-primary ring-1 bg-zinc-50 dark:ring-white/10 ring-primary/5 dark:bg-tertiary rounded-lg hover:ring-primary/5 dark:hover:ring-white/20 duration-300 group transition-all h-12 w-12"
           >

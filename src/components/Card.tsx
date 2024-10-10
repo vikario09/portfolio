@@ -39,16 +39,19 @@ export function Card(props) {
                     >
                         <a href={props.link} target="_blank">Demo →</a>
                     </CardItem>
-
-                    <CardItem
-                        translateZ={20}
-                        as="button"
-                        className="cursor-pointer px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-xs font-bold hover:text-primary hover:bg-primary/10 text-white duration-200"
-                    >
-                        <a href={props.github} target="_blank" className="">GitHub</a>
-                    </CardItem>
+                    <a href={props.github}>
+                        <CardItem
+                            translateZ={20}
+                            as="button"
+                            className="cursor-pointer px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-xs font-bold hover:text-primary text-white duration-200 dark:hover:bg-neutral-700 hover:bg-primary/10 dark:hover:text-white"
+                        >
+                            <a href={props.github} target="_blank" className="">
+                                GitHub
+                            </a>
+                        </CardItem>
+                    </a>
                 </div>
             </CardBody>
-        </CardContainer>
+        </CardContainer >
     );
 }
